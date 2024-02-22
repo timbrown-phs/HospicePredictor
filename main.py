@@ -11,9 +11,11 @@ def main():
     ui_df = pd.read_csv('ui~target_transfertohospice.csv')
 
     # Create Form Title Header
-    st.title('Prediction Classification')
-    st.header('Hospice Care')
-
+    st.title('Home Health Provider Assistant')
+    st.header('Patient Hospice Care Predictor')
+    st.write('''This app utilizes predictive modeling to assess home health encounter data, 
+                identifying patients who may need hospice care. It provides healthcare professionals 
+                with essential insights for timely and appropriate care decisions.''')
     # Iterate through the DataFrame and create Streamlit form elements
     ui_question_order_prev = 0
     form_values = {}
