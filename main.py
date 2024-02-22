@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import pandas as pd
+import base64
 
 def main():
 
@@ -9,6 +10,13 @@ def main():
 
     # Load UI Config file
     ui_df = pd.read_csv('ui~target_transfertohospice.csv')
+
+    import streamlit as st
+
+    css_url = "C://_GitHub//HospicePredictor//HomeHealthBackgroundImage.jpeg"
+    st.markdown(f'<link rel="stylesheet" href="{css_url}" type="text/css">', unsafe_allow_html=True)
+
+    # Your app code here
 
     # Create Form Title Header
     st.title('Home Health Provider Assistant')
@@ -61,7 +69,7 @@ def main():
                     form_values[field] = value
 
             elif ui_type == 'slider':
-                print(question,score_min, score_max, score_mean)
+                # print(question,score_min, score_max, score_mean)
                 option_value = st.slider(question, min_value=int(score_min),
                                                    max_value=int(score_max),
                                                    value=int(score_mean))
