@@ -13,9 +13,15 @@ def main():
 
     import streamlit as st
 
-    css_url = "C://_GitHub//HospicePredictor//HomeHealthBackgroundImage.jpeg"
-    st.markdown(f'<link rel="stylesheet" href="{css_url}" type="text/css">', unsafe_allow_html=True)
+    import base64
 
+    # st.markdown(
+    #     """
+    #     <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/timbrown-phs/HospicePredictor/master/style.css">
+    #     """,
+    #     unsafe_allow_html=True
+    # )
+    st.markdown("*Streamlit* is **really** ***cool***.")
     # Your app code here
 
     # Create Form Title Header
