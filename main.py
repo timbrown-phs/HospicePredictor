@@ -1,7 +1,6 @@
-import streamlit as st
 import pickle
 import pandas as pd
-import base64
+import streamlit as st
 
 def main():
 
@@ -11,25 +10,13 @@ def main():
     # Load UI Config file
     ui_df = pd.read_csv('ui~target_transfertohospice.csv')
 
-    import streamlit as st
-
-    import base64
-
-    # st.markdown(
-    #     """
-    #     <link rel="stylesheet" type="text/css" href="https://raw.githubusercontent.com/timbrown-phs/HospicePredictor/master/style.css">
-    #     """,
-    #     unsafe_allow_html=True
-    # )
-    st.markdown("*Streamlit* is **really** ***cool***.")
-    # Your app code here
-
-    # Create Form Title Header
-    st.title('Home Health Provider Assistant')
-    st.header('Patient Hospice Care Predictor')
+      # Create Form Title Header
+    st.title('PredictaCare Hospice')
+    st.header('Care Decision Assistant for Home Health Providers')
     st.write('''This app utilizes predictive modeling to assess home health encounter data, 
-                identifying patients who may need hospice care. It provides healthcare professionals 
-                with essential insights for timely and appropriate care decisions.''')
+                identifying patients who may need hospice care. It provides home health clinicians 
+                with essential insights to aid in their care decisions for their patients.''')
+
     # Iterate through the DataFrame and create Streamlit form elements
     ui_question_order_prev = 0
     form_values = {}
