@@ -1,6 +1,8 @@
 import pickle
 import pandas as pd
 import streamlit as st
+import numpy as np
+
 
 def main():
 
@@ -10,9 +12,10 @@ def main():
     # Load UI Config file
     ui_df = pd.read_csv('ui~target_transfertohospice.csv')
 
-      # Create Form Title Header
-    st.title('PredictaCare Hospice')
-    st.header('Care Decision Assistant for Home Health Providers')
+    # Create Form Title Header
+    st.title("PredictaCare Hospice")
+
+    st.header('A Hospice Care Decision Assistant for Home Health Providers')
     st.write('''This app utilizes predictive modeling to assess home health encounter data, 
                 identifying patients who may need hospice care. It provides home health clinicians 
                 with essential insights to aid in their care decisions for their patients.''')
@@ -83,21 +86,7 @@ def main():
     with open('XGBoost~target_transfertohospice.pkl', 'rb') as model_file:
         predictive_model = pickle.load(model_file)
 
-    # The feature importances can be extracted for RandomForest and many other model types
-    importances = predictive_model.feature_importances_
-
-    # Create a DataFrame with features and their importance
-    feature_importances_df = pd.DataFrame({'Importance': importances})
-
-    # Sort the DataFrame based on feature importance
-    feature_importances_df.sort_values(by='Importance', ascending=False, inplace=True)
-
-    # Save the DataFrame to a CSV file
-    feature_importances_df.to_csv('feature_importances.csv', index=False)
-
     def make_prediction(input_data):
-
-        import numpy as np
 
         input_data_2d = np.array(input_data).reshape(1, -1)
         prediction = predictive_model.predict(input_data_2d)
@@ -105,15 +94,23 @@ def main():
 
         return prediction, probability
 
+    # Inject custom CSS for button color
+    st.markdown("""
+    <style>
+    button {
+        background-color: red !important;
+        color: white !important;
+        border-color: darkred !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     # Button to trigger the predictive model
-    if st.button('Predict'):
+    if st.button('Run Hospice Care Prediction Assistant'):
 
         form_df = pd.DataFrame(list(form_values.items()), columns=['form_field', 'form_value'])
         form_df['form_feature'] = form_df['form_field'] + '_' + form_df['form_value'].astype(int).astype(str)
         form_df.to_csv('form_df.csv', index=False)
-
-        # Map model input values
-        import numpy as np
 
         # Create df for storing model inputs and other attribs
         ui_model_df = ui_df
@@ -159,11 +156,20 @@ def main():
         print('Prediction: ', prediction)
         print('Probability: ', probability_pct_str)
 
+        # Inject custom CSS to change the font size of success messages
+        st.markdown("""
+        <style>
+        .st-bs {  /* This class name is for demonstration and might not be accurate */
+            font-size: 40px !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+
         # Display the prediction result
         if prediction == 1:
-            st.success('❤️ Patient should be considered for Hospice Care with a high probability of ' + probability_pct_str + '❤️')
+            st.success('❤️ Patient may be considered for Hospice Care with a high probability of ' + probability_pct_str + '❤️')
         else:
-            st.success('💪 Patient does not likely need Hospice Care with a low probability of ' + probability_pct_str + '💪')
+            st.success('💪 Patient likely does not need Hospice Care with a low probability of ' + probability_pct_str + '💪')
 
 if __name__ == '__main__':
     main()

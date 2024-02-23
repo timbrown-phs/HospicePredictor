@@ -3,5 +3,5 @@ primaryColor = "#ff0000"   #Red
 backgroundColor = "#00008B" #Dark Blue
 secondaryBackgroundColor = "#0083B8"  #Medium Blue
 textColor = "#FFFFFF"  #White
-font = "sans-serif"
+font = "sans serif"
 base="dark"
