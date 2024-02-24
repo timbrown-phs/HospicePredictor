@@ -95,15 +95,15 @@ def main():
         return prediction, probability
 
     # Inject custom CSS for button color
-    st.markdown("""
-    <style>
-    button {
-        background-color: red !important;
-        color: white !important;
-        border-color: darkred !important;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    # st.markdown("""
+    # <style>
+    # button {
+    #     background-color: red !important;
+    #     color: white !important;
+    #     border-color: darkred !important;
+    # }
+    # </style>
+    # """, unsafe_allow_html=True)
 
     # Button to trigger the predictive model
     if st.button('Run Hospice Care Prediction Assistant'):
@@ -156,20 +156,11 @@ def main():
         print('Prediction: ', prediction)
         print('Probability: ', probability_pct_str)
 
-        # Inject custom CSS to change the font size of success messages
-        st.markdown("""
-        <style>
-        .st-bs {  /* This class name is for demonstration and might not be accurate */
-            font-size: 40px !important;
-        }
-        </style>
-        """, unsafe_allow_html=True)
-
         # Display the prediction result
         if prediction == 1:
             st.success('❤️ Patient may be considered for Hospice Care with a high probability of ' + probability_pct_str + '❤️')
         else:
-            st.success('💪 Patient likely does not need Hospice Care with a low probability of ' + probability_pct_str + '💪')
+            st.success('💪 Patient does not likely need Hospice Care with a low probability of ' + probability_pct_str + '💪')
 
 if __name__ == '__main__':
     main()
